@@ -1,5 +1,7 @@
 import React from 'react';
 
+import sampleFishes from '../sample-fishes';
+
 import Header from './Header';
 import Footer from './Footer';
 import Order from './Order';
@@ -13,6 +15,7 @@ class App extends React.Component{
             order: {}
         }
         this.addFish = this.addFish.bind(this);
+        this.loadSamples = this.loadSamples.bind(this);
     }
 
     addFish(fish){
@@ -20,6 +23,12 @@ class App extends React.Component{
         const timestamp = Date.now();
         fishes[`fish-${timestamp}`] = fish;
         this.setState({ fishes });
+    }
+
+    loadSamples(){
+        this.setState({
+            fishes: sampleFishes
+        })
     }
 
     render(){
@@ -30,7 +39,7 @@ class App extends React.Component{
                     <Footer />
                 </div>
                 <Order />
-                <Inventory addFish={this.addFish}/>
+                <Inventory loadSamples={this.loadSamples} addFish={this.addFish}/>
             </div>
         )
     }
